@@ -1,0 +1,54 @@
+{
+    "packages": [
+        {
+            "name": "luannsr12/sdkcorreios",
+            "version": "v1.5.2",
+            "version_normalized": "1.5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/luannsr12/sdkcorreios.git",
+                "reference": "1b630e488b9b548025f71031a1497befdc14c070"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/luannsr12/sdkcorreios/zipball/1b630e488b9b548025f71031a1497befdc14c070",
+                "reference": "1b630e488b9b548025f71031a1497befdc14c070",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "time": "2025-06-13T04:50:46+00:00",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "Sdkcorreios\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luan Alves"
+                }
+            ],
+            "description": "Sdk correios",
+            "support": {
+                "issues": "https://github.com/luannsr12/sdkcorreios/issues",
+                "source": "https://github.com/luannsr12/sdkcorreios/tree/v1.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/luannsr12",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../luannsr12/sdkcorreios"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
