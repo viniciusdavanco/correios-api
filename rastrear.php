@@ -61,3 +61,25 @@ if (php_sapi_name() === 'cli') {
 
     exit;
 }
+
+if (php_sapi_name() !== 'cli') {
+    // 1. Verifica se o código foi passado via GET
+    if (isset($_GET['codigo']) && !empty($_GET['codigo'])) {
+        $codigos = explode(',', $_GET['codigo']); // Permite múltiplos códigos separados por vírgula
+
+        // 2. Chama a função de rastreamento
+        $resultado = rastrearCodigos($codigos);
+
+        // 3. Imprime o JSON e define o cabeçalho correto
+        header('Content-Type: application/json');
+        echo json_encode($resultado, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } else {
+        // Se nenhum código for fornecido, retorna um erro JSON
+        header('Content-Type: application/json');
+        echo json_encode([
+            'erro' => true,
+            'mensagem' => 'Parâmetro "codigo" não fornecido. Use: /rastrear.php?codigo=SEU_CODIGO'
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+    exit;
+}

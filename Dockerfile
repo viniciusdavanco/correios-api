@@ -1,21 +1,31 @@
+# Use uma imagem base oficial do PHP com Apache
 FROM php:8.2-apache
 
-# enable apache rewrite module
-RUN a2enmod rewrite
+# Instale as dependências do sistema necessárias
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    && docker-php-ext-install zip
 
-# install composer inside container
-RUN apt-get update && apt-get install -y unzip git \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Instale o Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# copy app
+# Defina o diretório de trabalho
 WORKDIR /var/www/html
-COPY . /var/www/html
 
-# install composer packages
+# Copie os arquivos do projeto para o diretório de trabalho
+COPY . .
+
+# Instale as dependências do PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# expose port used by Render (MUITO IMPORTANTE)
-EXPOSE 10000
+# Configure o Apache para usar o diretório correto (se necessário, dependendo da sua estrutura)
+# Para a sua aplicação, que tem index.php na raiz, o padrão do Apache deve funcionar.
+# Se você precisar de um diretório público específico (ex: public/), adicione um arquivo .htaccess ou configure o vhost.
 
-# Apache listens on 80, Render maps 10000 -> 80
+# Exponha a porta 80 (padrão do Apache)
+EXPOSE 80
+
+# O comando padrão do PHP-Apache já inicia o servidor
 CMD ["apache2-foreground"]
